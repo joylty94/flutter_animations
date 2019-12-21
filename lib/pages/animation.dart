@@ -45,23 +45,16 @@ class _AnimationPageState extends State<AnimationPage> with SingleTickerProvider
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-       child: Column(
+    return Scaffold(
+       body: Column(
          children: <Widget>[
-            Container(
-              margin: EdgeInsets.only(top: 20),
-              child: Transform.rotate(
-                angle: animController.value,
-                child: Container(
-                  width: 100,
-                  height: 100,
-                  color: Colors.white,
-                  alignment: Alignment.center,
-                  child: FlutterLogo()
-                ),
-              )      
-              
-            )
+           Container(
+             margin: EdgeInsets.only(top: 30),
+             child: TuTransition(
+              angle: animation,
+              child: TuAnimation(),
+            ),
+           )
          ],
        ),
     );
@@ -71,5 +64,42 @@ class _AnimationPageState extends State<AnimationPage> with SingleTickerProvider
   void dispose() {
     animController.dispose();
     super.dispose();
+  }
+}
+
+class TuTransition extends StatelessWidget {
+  TuTransition({
+    @required this.angle,
+    @required this.child,
+  });
+
+  final Widget child;
+  final Animation<double> angle;
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: angle,
+      child: child,
+      builder: (context, child) {
+        return Transform.rotate(
+          angle: angle.value,
+          child: child,
+        );
+      },
+    );
+  }
+}
+
+class TuAnimation extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 100,
+      height: 100,
+      color: Colors.white,
+      alignment: Alignment.center,
+      child: FlutterLogo()
+    );
   }
 }
