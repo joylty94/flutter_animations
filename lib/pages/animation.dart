@@ -10,7 +10,7 @@ class AnimationPage extends StatefulWidget {
 
 class _AnimationPageState extends State<AnimationPage> with SingleTickerProviderStateMixin{
   AnimationController animController;
-  Animation<double> animation;
+  Animation<Offset> animation;
 
   @override
   void initState(){
@@ -26,7 +26,7 @@ class _AnimationPageState extends State<AnimationPage> with SingleTickerProvider
       reverseCurve: Curves.easeOut
     );
 
-    animation = Tween<double>(begin: 0, end: 2 * math.pi ).animate(curvedAnimation)
+    animation = Tween<Offset>(begin: Offset(0.0, 0.0), end: Offset(0.0, 300.0) ).animate(curvedAnimation)
     ..addListener((){
       setState(() {
         
@@ -50,7 +50,8 @@ class _AnimationPageState extends State<AnimationPage> with SingleTickerProvider
          children: <Widget>[
            Container(
              margin: EdgeInsets.only(top: 30),
-             child: TuTransition(
+             child: 
+             TuTransition(
               angle: animation,
               child: TuAnimation(),
             ),
@@ -74,7 +75,7 @@ class TuTransition extends StatelessWidget {
   });
 
   final Widget child;
-  final Animation<double> angle;
+  final Animation<Offset> angle;
 
   @override
   Widget build(BuildContext context) {
@@ -82,8 +83,8 @@ class TuTransition extends StatelessWidget {
       animation: angle,
       child: child,
       builder: (context, child) {
-        return Transform.rotate(
-          angle: angle.value,
+        return Transform.translate(
+          offset: angle.value,
           child: child,
         );
       },
