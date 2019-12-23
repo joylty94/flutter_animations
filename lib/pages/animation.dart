@@ -10,14 +10,33 @@ class AnimationPage extends StatefulWidget {
 }
 
 class _AnimationPageState extends State<AnimationPage> with SingleTickerProviderStateMixin{
+
+  List<String> a = ['1','2','3','4','5'];
+  
+  AnimationController animController1;
+  Animation<Offset> animation1;
+  AnimationController animController2;
+  Animation<Offset> animation2;
+  AnimationController animController3;
+  Animation<Offset> animation3;
+  AnimationController animController4;
+  Animation<Offset> animation4;
+  AnimationController animController5;
+  Animation<Offset> animation5;
+  AnimationController animController6;
+  Animation<Offset> animation6;
+  AnimationController animController7;
+  Animation<Offset> animation7;
   AnimationController animController;
   Animation<Offset> animation;
+
+  // var _alignment = Alignment(-1.0, -2.0);
 
   @override
   void initState(){
     super.initState();
     animController = AnimationController(
-      duration: Duration(seconds: 1),
+      duration: Duration(milliseconds: 1000),
       vsync: this
     );
 
@@ -43,10 +62,19 @@ class _AnimationPageState extends State<AnimationPage> with SingleTickerProvider
     });
 
     animController.forward();
+
+    // new Future.delayed(const Duration(microseconds: 100), () {
+    //   setState(() {
+    //     _alignment = Alignment(-1.0, 0.3);
+    //   });
+    // });
   }
 
-  List a = ['1','2','3','4'];
-  List<int> widgetIds = [0, 1, 2];
+  // _animationFc(){
+
+
+  // }
+
   bool t = false;
 
   Iterable<E> mapIndexed<E, T>(
@@ -74,6 +102,21 @@ class _AnimationPageState extends State<AnimationPage> with SingleTickerProvider
                     ),
                   )
                 ),
+                // AnimatedContainer(
+                //   duration: Duration(seconds: 2),
+                //   alignment: _alignment,
+                //     child: Transform.translate(
+                //       offset: Offset((30.0 + 20 * index), (0.0 - 15 * index)),
+                //       child: Container(
+                //         width: 200,
+                //         height: 100,
+                //         decoration: BoxDecoration(
+                //           color: Colors.black,
+                //           borderRadius: BorderRadius.circular(10)
+                //         ),
+                //     )
+                //   ),
+                // )
               )
               .toList(),
           // children: <Widget>[
